@@ -7,3 +7,14 @@ export default class Age {
   this.jupiterAge = jupiterAge;
   }
 }
+
+export default class passAge {
+  constructor(earthAgeHavePass, mercuryAgeHavePass, venusAgeHavePass, marsAgeHavePass, jupiterAgeHavepass,) {
+    
+  this.earthAgeHavePass = earthAgeHavePass;
+  this.mercuryAgeHavePass = mercuryAgeHavePass;
+  this.venusAgeHavePass = venusAgeHavePass;
+  this.marsAgeHavePass = marsAgeHavePass;
+  this.jupiterAgeHavepass = jupiterAgeHavepass;
+  }
+}
