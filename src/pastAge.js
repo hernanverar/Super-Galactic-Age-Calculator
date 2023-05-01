@@ -1,10 +1,9 @@
 export default class PastAge {
-  constructor(earthAgePast, mercuryRatio, venusRatio, marsRatio, jupiterRatio) {
-    if ( !earthAgePast || !(earthAgePast instanceof Date) || isNaN(earthAgePast.getTime())) {
-      throw new Error("Invalid date input");
+  constructor(pastAge, mercuryRatio, venusRatio, marsRatio, jupiterRatio) {
+    if (!pastAge || !(pastAge instanceof Date) || isNaN(pastAge.getTime())) {
     }
   
-    this.earthAgePast = earthAgePast;
+    this.pastAge = pastAge;
     this.mercuryRatio = mercuryRatio;
     this.venusRatio = venusRatio;
     this.marsRatio = marsRatio;
@@ -21,8 +20,29 @@ export default class PastAge {
         return this.marsAge;
       case "Jupiter":
         return this.jupiterAge;
-      // default:
-      //   return this.earthAge; // if I leave this piece line of code will give a passed test but only q 90% on Stmts
+      default:
+        return this.earthAge;
     }
+  }
+
+  _calculateAge(date) {
+    const ageDiffMs = Date.now() - date.getTime();
+    const ageDate = new Date(ageDiffMs);
+    return Math.abs(ageDate.getUTCFullYear() - 1970);
+  }
+
+  _calculatePlanetDate(planet) {
+    const planetRatio = {
+      Mercury: 0.2408467,
+      Venus: 0.61519726,
+      Earth: 1,
+      Mars: 1.8808158,
+      Jupiter: 11.862615,
+    };
+
+    const earthAgeMs = Date.now() - this.pastAge.getTime();
+    const planetAgeMs = earthAgeMs / (planetRatio[planet] * this.jupiterRatio);
+    const planetDate = new Date(Date.now() - planetAgeMs);
+    return planetDate;
   }
 }
